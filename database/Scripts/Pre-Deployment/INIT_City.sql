@@ -1,0 +1,7 @@
+﻿INSERT INTO City(Description, ShortDescription, State_id) VALUES('Recife', 'REC', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('Olinda', 'OLI', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('Jaboatão dos Guararapes', 'JAB', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('Camaragibe', 'CAM', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('Flores', 'FLO', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('Petrolina', 'PET', 17)
+INSERT INTO City(Description, ShortDescription, State_id) VALUES('São Lorenço da Mata', 'SLO', 17)

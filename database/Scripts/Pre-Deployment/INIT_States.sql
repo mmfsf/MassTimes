@@ -1,0 +1,32 @@
+﻿-- =============================================
+-- Script Template
+-- =============================================
+SET IDENTITY_INSERT [dbo].[State] ON
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (1, N'Acre', N'AC', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (2, N'Alagoas', N'AL', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (3, N'Amapá', N'AP', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (4, N'Amazonas', N'AM', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (5, N'Bahia', N'BA', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (6, N'Ceará', N'CE', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (7, N'Distrito Federal', N'DF', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (8, N'Espírito Santo', N'ES', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (9, N'Goiás', N'GO', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (10, N'Maranhão', N'MA', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (11, N'Mato Grosso', N'MT', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (12, N'Mato Grosso do Sul', N'MS', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (13, N'Minas Gerais', N'MG', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (14, N'Pará', N'PA', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (15, N'Paraíba', N'PB', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (16, N'Paraná', N'PR', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (17, N'Pernambuco', N'PE', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (18, N'Piauí', N'PI', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (19, N'Rio de Janeiro', N'RJ', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (20, N'Rio Grande do Norte', N'RN', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (21, N'Rio Grande do Sul', N'RS', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (22, N'Rondônia', N'RO', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (23, N'Roraima', N'RR', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (24, N'Santa Catarina', N'SC', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (25, N'São Paulo', N'SP', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (26, N'Sergipe', N'SE', 33)
+INSERT [dbo].[State] ([ID], [Description], [ShortDescription], [Country_ID]) VALUES (27, N'Tocantins', N'TO', 33)
+SET IDENTITY_INSERT [dbo].[State] OFF
