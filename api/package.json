@@ -1,0 +1,26 @@
+{
+  "name": "masstime",
+  "version": "1.0.0",
+  "description": "REST service for masstime",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmfsf/MassTimes.git"
+  },
+  "keywords": [
+    "mass",
+    "church"
+  ],
+  "author": "Marcos Farias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmfsf/MassTimes/issues"
+  },
+  "homepage": "https://github.com/mmfsf/MassTimes#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
