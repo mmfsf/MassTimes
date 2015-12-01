@@ -1,7 +1,7 @@
 {
-  "name": "masstime",
+  "name": "MassTimes",
   "version": "1.0.0",
-  "description": "REST service for masstime",
+  "description": "REST service for Mass Times",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/mmfsf/MassTimes#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "sequelize": "^3.14.1",
+    "tedious": "^1.13.1"
   }
 }

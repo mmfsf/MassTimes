@@ -1,22 +1,31 @@
 var express = require('express');
 var app = express();
 
+var dataaccess = require('./modules/dataaccess.js');
 var masstimerouter = require('./routes/masstime.js');
 
 app.get('/church', function(req, res){
-	res.send('All Church');
+	dataaccess.Churches(function(Churches){
+		res.send(Churches);
+	});
 });
 
 app.get('/church/:id', function(req, res){
-	res.send('Church ' + req.params.id);
+	dataaccess.ObjectById('Church', req.params.id, function(Church){
+		res.send(Church);
+	});
 });
 
 app.get('/parish', function(req, res){
-	res.send('All Parish');
+	dataaccess.Parishes(function(Parishes){
+		res.send(Parishes);
+	});
 });
 
 app.get('/parish/:id', function(req, res){
-	res.send('Parish ' + req.params.id);
+	dataaccess.ObjectById('Parish', req.params.id, function(Parish){
+		res.send(Parish);
+	});	
 });
 
 app.use(masstimerouter.routers);
