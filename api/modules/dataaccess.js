@@ -34,8 +34,8 @@ module.exports = {
   		});
 	},
 
-	MassTimes: function(callback){
-		sequelize.query("SELECT * FROM MassTime", { type: sequelize.QueryTypes.SELECT}).then(function(result) {
+	MassTimes: function(church_id, callback){
+		sequelize.query("SELECT * FROM MassTime WHERE Church_id = " + church_id, { type: sequelize.QueryTypes.SELECT}).then(function(result) {
     		callback(result);
   		});
 	},
