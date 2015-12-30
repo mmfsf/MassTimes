@@ -4,9 +4,12 @@ AS
 		[MassTime].Id,
 		[MassTime].Time,
 		[Church].Name,
+		[WeekDay].Id as WeekDay_id,
 		[WeekDay].Description AS WeekDay,
 		[WeekDay].ShortDescription AS ShortWeakDay,
+		[City].Id as City_id,
 		[City].Description AS City,
+		[Address].Id as Address_id,
 		[Address].Neighborhood
 	FROM MassTime
 	inner join Church on Church.Id = MassTime.Church_id

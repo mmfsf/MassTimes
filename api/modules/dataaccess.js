@@ -16,34 +16,36 @@ var sequelize_azure = new Sequelize('HoraDaMissa', 'ahoradamissa', 'P@ssw0rd', {
 });
 
 module.exports = {
-	Dioceses: function(callback){
-		sequelize.query("SELECT * FROM Diocese", { type: sequelize.QueryTypes.SELECT}).then(function(result) {
-    		callback(result);
-  		});
-	},
+  sequelize: sequelize,
 
-	Parishes: function(callback){
-		sequelize.query("SELECT * FROM Parish", { type: sequelize.QueryTypes.SELECT}).then(function(result) {
-    		callback(result);
-  		});
-	},
+  Dioceses: function(callback) {
+    sequelize.query("SELECT * FROM Diocese", {
+      type: sequelize.QueryTypes.SELECT
+    }).then(function(result) {
+      callback(result);
+    });
+  },
 
-	Churches: function(callback){
-		sequelize.query("SELECT * FROM Church", { type: sequelize.QueryTypes.SELECT}).then(function(result) {
-    		callback(result);
-  		});
-	},
+  Parishes: function(callback) {
+    sequelize.query("SELECT * FROM Parish", {
+      type: sequelize.QueryTypes.SELECT
+    }).then(function(result) {
+      callback(result);
+    });
+  },
 
-	MassTimes: function(church_id, callback){
-		sequelize.query("SELECT * FROM MassTime WHERE Church_id = " + church_id, { type: sequelize.QueryTypes.SELECT}).then(function(result) {
-    		callback(result);
-  		});
-	},
+  Churches: function(callback) {
+    sequelize.query("SELECT * FROM Church", {
+      type: sequelize.QueryTypes.SELECT
+    }).then(function(result) {
+      callback(result);
+    });
+  },
 
-	ObjectById: function(object, id, callback){
-		var query = "SELECT * FROM " + object + " WHERE Id = " + id;
-		sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
-    		callback(result);
-  		});
-	}
+  object_by_id: function(object, id, callback) {
+    var query = "SELECT * FROM " + object + " WHERE Id = " + id;
+    sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
+      callback(result);
+    });
+  }
 }

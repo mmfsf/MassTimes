@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mmfsf/MassTimes#readme",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
     "sequelize": "^3.14.1",
     "tedious": "^1.13.1"
