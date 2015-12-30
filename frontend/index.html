@@ -8,6 +8,7 @@
 
 	<title>A hora da Missa</title>
 
+	<link href="css/style.css" rel="stylesheet">
 	<!-- Bootstrap -->
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,7 +23,7 @@
 <body>
 	<div class="container-fluid" ng-controller="indexcontroller">
 		<div class="page-header">
-			<div style="width: 100%; height: 150px; margin-bottom: 2px; background-position: -1390px -455px; background-image: url(https://gri2pq.bay.livefilestore.com/y1plh8fJy801hp7HQCTDFFgvj4vvHf0ViVQAqsmoKovCzaLeNqmVh6hnXSPdZrsxiu2LZmepYhDSv4/20061128122354!Vatican_StPaul_Statue.jpg?psid=1)">
+			<div class="div-img-header">
             	<h1 style="color: #FFF; padding-left: 10px; padding-top: 60px;">A Hora da Missa</h1>
         	</div>
 		</div>
@@ -41,23 +42,20 @@
                         <li><a href="/MassTime/Neighborhood">Por bairro</a></li>
                         <li><a href="/MassTime/City">Na Cidade</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a href="/Contact/SuggestMassTime">Contato</a></li>
+                        <li><a href="{{ contact_link }}" target="blank">Contato</a></li>
                     </ul>
                 </div>
             </nav>
 		</div>
-		<div class="row">
+		<!--<div class="row">
 			<ol class="breadcrumb">
 		  		<li><a href="#">Home</a></li>
 		  		<li><a href="#">Library</a></li>
 		  		<li class="active">Data</li>
 			</ol>
-		</div>
+		</div>-->
 		<div class="row">
-			<div class="col-md-1">{{ name }}</div>
-			<div class="col-md-1">{{ surname }}</div>
 		</div>
-
 	</div>	
 	<!-- -->
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
