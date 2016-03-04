@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="indexmodule">
+<html lang="en" ng-app="appmodule">
 
 <head>
 	<meta charset="utf-8">
@@ -32,15 +32,14 @@
                 <div class="container-fluid">
                 	<div class="navbar-header">
 				      <a class="navbar-brand" href="#">
-				        <img alt="Brand" src="...">
+				        <img alt="Brand" src="">
 				      </a>
 				    </div>
                     <ul id="sitemenu" class="nav navbar-nav navbar-left">
                         <li><a href="/Home/Index">Início</a></li>
                         <li class="divider-vertical"></li>
-                        <li><a href="/MassTime/Time">Por hora</a></li>
-                        <li><a href="/MassTime/Neighborhood">Por bairro</a></li>
-                        <li><a href="/MassTime/City">Na Cidade</a></li>
+                        <li><a href="/Time">Por hora</a></li>
+                        <li><a href="/City">Na Cidade</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="{{ contact_link }}" target="blank">Contato</a></li>
                     </ul>
@@ -54,7 +53,8 @@
 		  		<li class="active">Data</li>
 			</ol>
 		</div>-->
-		<div class="row">
+		<div class="row"> 
+            <ng-view></ng-view>
 		</div>
 	</div>	
 	<!-- -->
@@ -62,8 +62,10 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
 	<!-- -->
 	<script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
 </body>
 
 </html>
