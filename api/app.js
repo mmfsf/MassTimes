@@ -22,6 +22,9 @@ app.use(masstimerouter.routers);
 app.use(churchesrouter.routers);
 app.use(parishesrouter.routers);
 
+//statics
+app.use(express.static('../frontend'));
+
 app.get('/', function(req, res) {
 	res.send('Mass Time');
 });
