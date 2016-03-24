@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 var masstimerouter = require('./routes/masstime.js');
 var churchesrouter = require('./routes/church.js');
 var parishesrouter = require('./routes/parish.js');
+var citiesrouter = require('./routes/city.js');
 //middlewares
 var citymiddleware = require('./middleware/city.js');
 
@@ -21,6 +22,7 @@ app.use('/', citymiddleware);
 app.use(masstimerouter.routers);
 app.use(churchesrouter.routers);
 app.use(parishesrouter.routers);
+app.use(citiesrouter.routers);
 
 //statics
 app.use(express.static('../frontend'));

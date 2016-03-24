@@ -1,5 +1,6 @@
-<form>
-    <select id='cities' class="dropdown">
-        <option ng-repeat="city in cities">{{ city }}</option>
-    </select>
-</form>
+<div class="col-md-12" ng-repeat="city in cities">
+    <h4>{{ city.Description }}</h4>
+    <div class="col-md-3" ng-repeat="neighborhood in city.neighborhoods">
+        <a href="" ng-click="OnNeighborhoodClick(city.Id, neighborhood.Neighborhood)">{{ neighborhood.Neighborhood }}</a>
+    </div>
+</div>
