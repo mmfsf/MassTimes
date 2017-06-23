@@ -1,5 +1,5 @@
 {
-  "name": "MassTime",
+  "name": "masstime",
   "homepage": "https://github.com/mmfsf/MassTimes",
   "description": "",
   "main": "",
@@ -18,8 +18,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.4.7",
+    "angular": "1.6.4",
     "bootstrap": "~3.3.5",
-    "angular-route": "1.4.x"
+    "angular-route": "1.6.x"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
   }
 }
