@@ -1,13 +1,13 @@
 var dataaccess = require('./dataaccess.js') ;
 var sequelize = dataaccess.sequelize;
 
-var cities = function(callback) {
-	sequelize.query("SELECT * FROM City", { type: sequelize.QueryTypes.SELECT }).then(function(result) {
+var Cities = function(callback) {
+	sequelize.query("select * from City", { type: sequelize.QueryTypes.SELECT }).then(function(result) {
 		callback(result);
 	});
 }
 
-var neighborhoods_by_city = function(city_id, callback) {
+var NeighborhoodsByCity = function(city_id, callback) {
 	var query = "select distinct Neighborhood from Address where City_id = " + city_id;
 
 	sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
@@ -15,7 +15,23 @@ var neighborhoods_by_city = function(city_id, callback) {
 	});
 }
 
+var CityByName = function(name, callback){
+	var query = "select * from Address where Description like %" + name + "%";
+
+	sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
+		callback(result);
+	});
+}
+
+var Get = function(id, callback) {
+	dataaccess.ObjectById("City", id, function(result){
+		callback(result);
+	});
+}
+
 module.exports = {
-	cities: cities,
-	neighborhoods_by_city: neighborhoods_by_city,
+	Get: Get,
+	Cities: Cities,
+	NeighborhoodsByCity: NeighborhoodsByCity,
+	CityByName: CityByName
 }

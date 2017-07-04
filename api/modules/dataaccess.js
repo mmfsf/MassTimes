@@ -19,7 +19,7 @@ module.exports = {
   sequelize: sequelize_azure,
 
   Dioceses: function(callback) {
-    this.sequelize.query("SELECT * FROM Diocese", {
+    this.sequelize.query("select * from Diocese", {
       type: sequelize.QueryTypes.SELECT
     }).then(function(result) {
       callback(result);
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   Parishes: function(callback) {
-    this.sequelize.query("SELECT * FROM Parish", {
+    this.sequelize.query("select * from Parish", {
       type: sequelize.QueryTypes.SELECT
     }).then(function(result) {
       callback(result);
@@ -35,15 +35,15 @@ module.exports = {
   },
 
   Churches: function(callback) {
-    this.sequelize.query("SELECT * FROM Church", {
+    this.sequelize.query("select * from Church", {
       type: sequelize.QueryTypes.SELECT
     }).then(function(result) {
       callback(result);
     });
   },
 
-  object_by_id: function(object, id, callback) {
-    var query = "SELECT * FROM " + object + " WHERE Id = " + id;
+  ObjectById: function(object, id, callback) {
+    var query = "select * from " + object + " where Id = " + id;
     this.sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
       callback(result);
     });
