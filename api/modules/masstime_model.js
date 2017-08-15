@@ -33,7 +33,7 @@ var MasstimeByNeighborhood = function(neighborhood, callback) {
 	});
 }
 
-var MasstimeByWeekday = function(weekday, city_id, callback) {
+var MasstimeByWeekday = function(weekday, callback) {
 	var query = "select * from VW_MASSTIMES where WeekDay_id = " + weekday;
 
 	sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {

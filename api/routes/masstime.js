@@ -4,7 +4,7 @@ var router = express.Router();
 var masstime_model = require('../modules/masstime_model.js');
 
 router.get('/masstime/weekday/:id', function(req, res) {
-	masstime_model.MasstimeByWeekday(req.params.id, req.city, function(result) {
+	masstime_model.MasstimeByWeekday(req.params.id, function(result) {
 		res.send(result);
 	});
 });

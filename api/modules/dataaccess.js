@@ -7,7 +7,7 @@ var sequelize = new Sequelize('MassTimes', 'sa', '159753', {
 });
 
 // AZURE
-var sequelize_azure = new Sequelize('HoraDaMissa', 'ahoradamissa', '1qaz@WSX', {
+var sequelize_azure = new Sequelize('HoraDaMissa', 'ahoradamissa', '', {
   host: 'baylemx05i.database.windows.net',
   dialect: 'mssql',
   dialectOptions: {

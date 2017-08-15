@@ -16,7 +16,7 @@ var NeighborhoodsByCity = function(city_id, callback) {
 }
 
 var CityByName = function(name, callback){
-	var query = "select * from Address where Description like %" + name + "%";
+	var query = "select * from City where Description like %" + name + "%";
 
 	sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
 		callback(result);

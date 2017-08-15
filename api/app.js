@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require("path");
 
 var app = express();
 
@@ -26,10 +27,12 @@ app.use(parishesrouter.routers);
 app.use(citiesrouter.routers);
 
 //statics
-app.use(express.static('../frontend'));
+var frontendpath = path.join(__dirname+'/../frontend');
+app.use(express.static(frontendpath));
 
 app.get('/', function(req, res) {
-	res.send('Mass Time');
+	//res.send('Mass Times');
+	res.sendFile(path.join(frontendpath+'/index.html'));
 });
 
 var port = process.env.PORT || 3000;
