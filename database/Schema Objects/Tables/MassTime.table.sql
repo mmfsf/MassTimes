@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[MassTime] (
     [Id]         INT      IDENTITY (1, 1) NOT NULL,
     [Status]     BIT      NOT NULL,
-    [Time]       DATETIME NOT NULL,
+    [Time]       TIME(7) NOT NULL,
     [Church_id]  INT      NULL,
     [Weekday_id] INT      NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF),
