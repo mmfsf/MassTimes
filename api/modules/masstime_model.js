@@ -42,7 +42,7 @@ var MasstimeByWeekday = function(weekday, city_id, callback) {
 }
 
 var MasstimeByTime = function(time, callback) {
-	var query = "select * from VW_MASSTIMES where Time = " + time;
+	var query = "select * from VW_MASSTIMES where Time = '" + time + "'";
 
 	sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function(result) {
 		callback(result);
@@ -61,5 +61,6 @@ module.exports = {
 	MasstimeByCity: MasstimeByCity,
 	MasstimeByNeighborhood: MasstimeByNeighborhood,
 	MasstimeByWeekday: MasstimeByWeekday,
+	MasstimeByTime: MasstimeByTime,
 	Get: Get
 }

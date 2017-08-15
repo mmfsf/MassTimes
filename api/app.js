@@ -17,7 +17,8 @@ var citiesrouter = require('./routes/city.js');
 var citymiddleware = require('./middleware/city.js');
 
 //middlewares
-app.use('/', citymiddleware);
+//app.use('/', citymiddleware);
+
 //routes
 app.use(masstimerouter.routers);
 app.use(churchesrouter.routers);
@@ -31,9 +32,11 @@ app.get('/', function(req, res) {
 	res.send('Mass Time');
 });
 
+var port = process.env.PORT || 3000;
+
 module.exports.start = function start(){
-	
-	var listener = app.listen(3000, function() {
+
+	var listener = app.listen(port, function() {
 		console.log('Started!');
 		console.log(listener.address().port);
 		console.log(listener.address().address);
