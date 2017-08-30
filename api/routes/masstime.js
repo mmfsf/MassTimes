@@ -10,8 +10,8 @@ router.get('/masstime/weekday/:id', function(req, res) {
 });
 
 //hhMMss
-router.get('/masstime/time/:time', function(req, res) {
-	masstime_model.MasstimeByTime(req.params.time, function(result) {
+router.get('/masstime/city/:id/time/:time', function(req, res) {
+    masstime_model.MasstimeByTimeAndCity(req.params.id, req.params.time, function(result) {
 		res.send(result);
 	});
 });

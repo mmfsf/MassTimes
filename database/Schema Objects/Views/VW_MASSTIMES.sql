@@ -3,6 +3,7 @@ AS
 	SELECT 
 		[MassTime].Id,
 		[MassTime].Time,
+		[Church].Id as Church_id,
 		[Church].Name,
 		[WeekDay].Id as WeekDay_id,
 		[WeekDay].Description AS WeekDay,

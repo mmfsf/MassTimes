@@ -15,10 +15,12 @@ router.get('/churches/:id', function(req, res) {
 	});
 });
 
-router.get('/churches/:id/masstimes', function(req, res) {
-	dataaccess.MassTimes(req.params.id, function(result) {
-		res.send(result);
-	});
+router.get('/churches/:id/address', function(req, res) {
+    dataaccess.ObjectById('Church', req.params.id, function (Church) {
+        dataaccess.ObjectById('Address', Church[0].Address_id, function (Address) {
+            res.send(Address);
+        });
+    });
 });
 
 module.exports = {

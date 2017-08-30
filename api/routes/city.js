@@ -16,9 +16,21 @@ router.get('/cities/:id', function(req, res) {
 });
 
 router.get('/cities/:id/neighborhood', function(req, res) {
-	dataaccess.NeighborhoodsByCity(req.params.id, function(cities) {
-		res.send(cities);
+    dataaccess.NeighborhoodsByCity(req.params.id, function (neighborhood) {
+        res.send(neighborhood);
 	});
+});
+
+router.get('/cities/:id/times', function (req, res) {
+    dataaccess.DistinctMassTimeByCity(req.params.id, function (times) {
+        res.send(times);
+    });
+});
+
+router.get('/citieswithmass', function (req, res) {
+    dataaccess.CitiesWithMass(function (cities) {
+        res.send(cities);
+    });
 });
 
 module.exports = {
