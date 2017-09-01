@@ -10,6 +10,7 @@ AS
 		[WeekDay].ShortDescription AS ShortWeakDay,
 		[City].Id as City_id,
 		[City].Description AS City,
+		(ISNULL([Address].Street, '') + ', ' + ISNULL([Address].Number, '') + ', ' + ISNULL([Address].ZipCode, '')) as [Address],
 		[Address].Id as Address_id,
 		[Address].Neighborhood
 	FROM MassTime

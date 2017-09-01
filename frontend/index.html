@@ -81,8 +81,7 @@
                                     <th>Bairro</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                     <div class="col-xs-6 col-md-4">
@@ -110,8 +109,39 @@
                                 </tr>
                             </thead>
                         </table>
+                        <div id="mass-place" class="row"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <div id="masstimetable" class="col-xs-9 col-md-6 hide">
+        <input id="church_id" value="0" type="hidden" />
+        <h4 class="church-name"></h4>
+        <h5 class="church-neighborhood"></h5>
+        <h6 class="church-address"></h6>
+        <div class="row">
+            <div class="col-xs-1 col-md-1 weekday-1">
+                <strong>Dom</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-2">
+                <strong>Seg</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-3">
+                <strong>Ter</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-4">
+                <strong>Qua</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-5">
+                <strong>Qui</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-6">
+                <strong>Sex</strong>
+            </div>
+            <div class="col-xs-1 col-md-1 weekday-7">
+                <strong>Sáb</strong>
             </div>
         </div>
     </div>
@@ -133,7 +163,10 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- -->
+    <script src="bower_components/js-cookie/src/js.cookie.js"></script>
+    <!-- -->
     <script src="app/app.module.js"></script>
+    <script src="app/app.city.js"></script>
 </body>
 
 </html>

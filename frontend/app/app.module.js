@@ -10,6 +10,9 @@
     });
 
     $(document).on("click", "tr.city", function () {
+        $("tr.city").removeClass("bg-info");
+        $(this).addClass("bg-info");
+
         $('#neighborhood').children('tbody').remove();
         $('#time').children('tbody').remove();
 
@@ -58,29 +61,6 @@
         });
     });
 
-})();
-
-function padLeft(nr, n, str) {
-    return Array(n - String(nr).length + 1).join(str || '0') + nr;
-}
-
-function formatTimeToDisplay(time) {
-    return padLeft(new Date(time).getUTCHours(), 2) + ":" + padLeft(new Date(time).getUTCMinutes(), 2)
-}
-
-function fillMassTimeBodyTable(data) {
-    var items = [];
-    $.each(data, function (key, val) {
-        items.push("<tr class='masstime'>" +
-            "<td>" + val.Neighborhood + "</td >" +
-            "<td title='" + val.Church_id + "'>" + val.Name + "</td >" +
-            "<td>" + val.WeekDay + "</td >" +
-            "<td>" + formatTimeToDisplay(val.Time) + "</td >" +
-            "</tr > ");
-    });
-
-    $("<tbody>", { html: items.join("") }).appendTo("#masstimes");
-
     $(document).on("click", "tr.masstime", function () {
         var church = $(this).children("td:eq(1)").html();
         var church_id = $(this).children("td:eq(1)").attr('title');
@@ -97,4 +77,51 @@ function fillMassTimeBodyTable(data) {
             });
         });
     });
+
+})();
+
+function padLeft(nr, n, str) {
+    return Array(n - String(nr).length + 1).join(str || '0') + nr;
+}
+
+function formatTimeToDisplay(time) {
+    return padLeft(new Date(time).getUTCHours(), 2) + ":" + padLeft(new Date(time).getUTCMinutes(), 2)
+}
+
+function fillMassTimeBodyTable(data) {
+
+    $("#mass-place").empty();
+
+    var items = [];
+    var church_id = 0;
+    var $masstimetable = null;
+
+    $.each(data, function (key, val) {
+        items.push("<tr class='masstime'>" +
+            "<td>" + val.Neighborhood + "</td >" +
+            "<td title='" + val.Church_id + "'>" + val.Name + "</td >" +
+            "<td>" + val.WeekDay + "</td >" +
+            "<td>" + formatTimeToDisplay(val.Time) + "</td >" +
+            "</tr > ");
+
+        if (church_id != val.Church_id) {
+            church_id = val.Church_id;
+            $masstimetable = $("#masstimetable").clone();
+            $masstimetable.attr("id", "masstimetable" + key);
+
+            $masstimetable.find("#church_id").val(church_id);
+            $masstimetable.find(".church-name").text(val.Name);
+            $masstimetable.find(".church-neighborhood").text(val.Neighborhood);
+            $masstimetable.find(".church-address").text(val.Address.replace(", null", ""));
+
+            $masstimetable.addClass("temp");
+            $masstimetable.removeClass("hide");
+
+            $("#mass-place").append($masstimetable)
+        }
+        $masstimetable.find(".weekday-" + val.WeekDay_id + "").append("<p>" + formatTimeToDisplay(val.Time) + "</p>");
+
+    });
+
+    $("<tbody>", { html: items.join("") }).appendTo("#masstimes");
 }

@@ -24,7 +24,7 @@ var CityByName = function(name, callback){
 }
 
 var DistinctMassTimeByCity = function (city_id, callback) {
-    var query = "select distinct [Time] from VW_MASSTIMES where city_id = " + city_id;
+    var query = "select distinct [Time] from VW_MASSTIMES where city_id = " + city_id + " order by [Time]";
 
     sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function (result) {
         callback(result);
