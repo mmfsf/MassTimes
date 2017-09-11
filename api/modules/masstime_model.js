@@ -37,7 +37,7 @@ var MasstimeByNeighborhood = function (neighborhood, callback) {
 }
 
 var MasstimeByWeekday = function (weekday, callback) {
-    var query = "select * from VW_MASSTIMES where WeekDay_id = " + weekday + query_order_by;
+    var query = "select * from VW_MASSTIMES where church_id in (select distinct church_id from VW_MASSTIMES where WeekDay_id = " + weekday + ")" + query_order_by;
 
     sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function (result) {
         callback(result);
@@ -45,7 +45,7 @@ var MasstimeByWeekday = function (weekday, callback) {
 }
 
 var MasstimeByTimeAndCity = function (city_id, time, callback) {
-    var query = "select * from VW_MASSTIMES where city_id = " + city_id + " and Time = '" + time + "'" + query_order_by;
+    var query = "select * from VW_MASSTIMES where church_id in (select distinct church_id from VW_MASSTIMES where city_id = " + city_id + " and Time = '" + time + "')" + query_order_by;
 
     sequelize.query(query, { type: sequelize.QueryTypes.SELECT }).then(function (result) {
         callback(result);

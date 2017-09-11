@@ -46,7 +46,7 @@
 
         var neighborhood = $(this).children(':last-child').html();
         $.getJSON("/masstime/neighborhood/" + neighborhood, function (data) {
-            fillMassTimeBodyTable(data);
+            fillMassTimeInfo(data);
         });
     });
 
@@ -57,24 +57,7 @@
         var city_id = $(this).children(':last-child').children(':input').val();
 
         $.getJSON("/masstime/city/" + city_id + "/time/" + time, function (data) {
-            fillMassTimeBodyTable(data);
-        });
-    });
-
-    $(document).on("click", "tr.masstime", function () {
-        var church = $(this).children("td:eq(1)").html();
-        var church_id = $(this).children("td:eq(1)").attr('title');
-
-        $.getJSON("/churches/" + church_id + "/address", function (data) {
-            $.each(data, function (key, val) {
-                var modal = $(".bs-church-modal-sm");
-                var address = ("<p>" + val.Street + ", " + val.Number + ", " + val.ZipCode + "</p>").replace(", null", "");
-
-                modal.find(".modal-title").text(church);
-                modal.find(".modal-body").html(address);
-
-                modal.modal("show");
-            });
+            fillMassTimeInfo(data);
         });
     });
 
@@ -88,22 +71,14 @@ function formatTimeToDisplay(time) {
     return padLeft(new Date(time).getUTCHours(), 2) + ":" + padLeft(new Date(time).getUTCMinutes(), 2)
 }
 
-function fillMassTimeBodyTable(data) {
+function fillMassTimeInfo(data) {
 
     $("#mass-place").empty();
 
-    var items = [];
     var church_id = 0;
     var $masstimetable = null;
 
     $.each(data, function (key, val) {
-        items.push("<tr class='masstime'>" +
-            "<td>" + val.Neighborhood + "</td >" +
-            "<td title='" + val.Church_id + "'>" + val.Name + "</td >" +
-            "<td>" + val.WeekDay + "</td >" +
-            "<td>" + formatTimeToDisplay(val.Time) + "</td >" +
-            "</tr > ");
-
         if (church_id != val.Church_id) {
             church_id = val.Church_id;
             $masstimetable = $("#masstimetable").clone();
@@ -112,7 +87,7 @@ function fillMassTimeBodyTable(data) {
             $masstimetable.find("#church_id").val(church_id);
             $masstimetable.find(".church-name").text(val.Name);
             $masstimetable.find(".church-neighborhood").text(val.Neighborhood);
-            $masstimetable.find(".church-address").text(val.Address.replace(", null", ""));
+            $masstimetable.find(".church-address").text(val.Address.replace(/, null/g, ""));
 
             $masstimetable.addClass("temp");
             $masstimetable.removeClass("hide");
@@ -120,8 +95,5 @@ function fillMassTimeBodyTable(data) {
             $("#mass-place").append($masstimetable)
         }
         $masstimetable.find(".weekday-" + val.WeekDay_id + "").append("<p>" + formatTimeToDisplay(val.Time) + "</p>");
-
     });
-
-    $("<tbody>", { html: items.join("") }).appendTo("#masstimes");
 }
