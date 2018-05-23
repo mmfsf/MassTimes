@@ -90,7 +90,7 @@ function fillMassTimeInfo(data) {
             $masstimetable.find(".church-address").text(val.Address.replace(/, null/g, ""));
 
             $masstimetable.addClass("temp");
-            $masstimetable.removeClass("hide");
+            $masstimetable.removeClass("d-none");
 
             $("#mass-place").append($masstimetable)
         }

@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 9999;
 
 module.exports.start = function start(){
 
