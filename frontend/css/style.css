@@ -8,7 +8,16 @@ body {
 .div-img-header {
 	width: 100%;
 	height: 150px;
-	margin-bottom: 2px;
 	background-position: -1390px -455px;
 	background-image: url(https://gri2pq.bay.livefilestore.com/y1plh8fJy801hp7HQCTDFFgvj4vvHf0ViVQAqsmoKovCzaLeNqmVh6hnXSPdZrsxiu2LZmepYhDSv4/20061128122354!Vatican_StPaul_Statue.jpg?psid=1);
+}
+
+.facebook-logo {
+  position: absolute;
+  right: 20px;
+}
+
+.facebook-logo img {
+  height: 32px;
+  width: 32px;
 }
