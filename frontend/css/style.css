@@ -13,6 +13,7 @@ body {
 }
 
 .facebook-logo {
+  cursor: pointer;
   position: absolute;
   right: 20px;
 }
