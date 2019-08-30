@@ -1,12 +1,12 @@
-using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace masstimes.api.Services
 {
     public interface IService<T>
     {
-        T Get(int id);
-        IQueryable<T> Find();
-        void Save(T entity);
-        void Delete(int id);
+        Task<T> Get(int id);
+        Task<IList<T>> Find(Func<T, bool> predicate = null);
     }
 }

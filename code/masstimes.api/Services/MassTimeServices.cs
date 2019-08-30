@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class ChurchServices : CommonServices, IService<Church>
+    public class MassTimeServices : CommonServices, IService<Church>
     {
-        public ChurchServices(IConfiguration config) : base(config)
+        public MassTimeServices(IConfiguration config) : base(config)
         {
         }
 
