@@ -6,8 +6,11 @@ namespace masstimes.api.Models
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
-        public Church Church { get; set; }
-        public int Weekday { get; set; }
+        public string Church { get; set; }
+        public string Weekday { get; set; }
+        public string ShortWeekDay { get; set; }
+        public string City { get; set; }
+        public string Neighborhood { get; set; }
         public bool Status { get; set; }
     }
 }

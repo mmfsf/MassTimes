@@ -9,19 +9,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class MassTimeServices : CommonServices, IService<Church>
+    public class MassTimeServices : CommonServices, IService<MassTime>
     {
         public MassTimeServices(IConfiguration config) : base(config)
         {
         }
 
-        public async Task<IList<Church>> Find(Func<Church, bool> predicate = null)
+        public async Task<IList<MassTime>> Find(Func<MassTime, bool> predicate = null)
         {
             using (IDbConnection conn = Connection)
             {
-                string sQuery = "SELECT Id, Name FROM Church";
+                string sQuery = "SELECT Id, Time, @Church = Name, Weekday FROM VW_MASSTIMES ORDER BY Name, WeekDay_id, Time";
                 conn.Open();
-                var result = await conn.QueryAsync<Church>(sQuery);
+                var result = await conn.QueryAsync<MassTime>(sQuery);
                 if(predicate != null)
                 {
                     return result.Where(predicate).ToList();
@@ -30,13 +30,13 @@ namespace masstimes.api.Services
             }
         }
 
-        public async Task<Church> Get(int id) 
+        public async Task<MassTime> Get(int id) 
         {
             using (IDbConnection conn = Connection)
             {
-                string sQuery = "SELECT Id, Name FROM Church WHERE Id = @ID";
+                string sQuery = "SELECT Id, Time,  @Church = Name, Weekday FROM VW_MASSTIMES WHERE Id = @ID ORDER BY Name, WeekDay_id, Time";
                 conn.Open();
-                var result = await conn.QueryAsync<Church>(sQuery, new { ID = id });
+                var result = await conn.QueryAsync<MassTime>(sQuery, new { ID = id });
                 return result.FirstOrDefault();
             }
         }
