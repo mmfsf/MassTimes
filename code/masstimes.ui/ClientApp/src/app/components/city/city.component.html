@@ -1,0 +1,13 @@
+<clr-datagrid>
+    <clr-dg-column>ID</clr-dg-column>
+    <clr-dg-column>Description</clr-dg-column>
+    <clr-dg-column>Short description</clr-dg-column>
+
+    <clr-dg-row *ngFor="let city of cities">
+        <clr-dg-cell>{{city.id}}</clr-dg-cell>
+        <clr-dg-cell>{{city.description}}</clr-dg-cell>
+        <clr-dg-cell>{{city.shortDescription}}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>{{cities.length}} cities</clr-dg-footer>
+</clr-datagrid>

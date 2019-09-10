@@ -11,6 +11,9 @@ namespace masstimes.api.Services
 {
     public class MassTimeServices : CommonServices, IService<MassTime>
     {
+        private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood FROM VW_MASSTIMES";
+        private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
+
         public MassTimeServices(IConfiguration config) : base(config)
         {
         }
@@ -19,7 +22,7 @@ namespace masstimes.api.Services
         {
             using (IDbConnection conn = Connection)
             {
-                string sQuery = "SELECT Id, Time, @Church = Name, Weekday FROM VW_MASSTIMES ORDER BY Name, WeekDay_id, Time";
+                string sQuery = $"{BASE_QUERY} {ORDERBY_QUERY}";
                 conn.Open();
                 var result = await conn.QueryAsync<MassTime>(sQuery);
                 if(predicate != null)
@@ -34,10 +37,10 @@ namespace masstimes.api.Services
         {
             using (IDbConnection conn = Connection)
             {
-                string sQuery = "SELECT Id, Time,  @Church = Name, Weekday FROM VW_MASSTIMES WHERE Id = @ID ORDER BY Name, WeekDay_id, Time";
+                string sQuery = $"{BASE_QUERY} WHERE Id = @ID {ORDERBY_QUERY}";
                 conn.Open();
-                var result = await conn.QueryAsync<MassTime>(sQuery, new { ID = id });
-                return result.FirstOrDefault();
+                var result = await conn.QueryFirstAsync<MassTime>(sQuery, new { ID = id });
+                return result;
             }
         }
     }

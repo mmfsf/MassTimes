@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using masstimes.api.Services;
 using masstimes.api.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace masstimes.api.Controllers
 {
@@ -16,16 +17,14 @@ namespace masstimes.api.Controllers
             this.service = service;
         }
 
+        [Produces("application/json")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Church>>> Get()
-        {
-            return Ok(await service.Find());
-        }
+        public async Task<ActionResult<IEnumerable<Church>>> Get() => Ok(await service.Find());
 
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Church>> Get(int id)
-        {
-            return Ok(await service.Get(id));
-        }
+        public async Task<ActionResult<Church>> Get(int id) => Ok(await service.Get(id));
     }
 }

@@ -1,3 +1,5 @@
+DROP VIEW VW_MASSTIMES;
+GO
 CREATE VIEW VW_MASSTIMES
 AS 
 	SELECT 
@@ -7,7 +9,7 @@ AS
 		[Church].Name,
 		[WeekDay].Id as WeekDay_id,
 		[WeekDay].Description AS WeekDay,
-		[WeekDay].ShortDescription AS ShortWeakDay,
+		[WeekDay].ShortDescription AS ShortWeekDay,
 		[City].Id as City_id,
 		[City].Description AS City,
 		(ISNULL([Address].Street, 'null') + ', ' + ISNULL([Address].Number, 'null') + ', ' + ISNULL([Address].ZipCode, 'null')) as [Address],
