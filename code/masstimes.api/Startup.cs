@@ -53,8 +53,8 @@ namespace masstimes.api
         {
             services.AddTransient<ICommonService, CommonServices>();
             services.AddTransient<IService<Church>, ChurchServices>();
-            services.AddTransient<IService<MassTime>, MassTimeServices>();
-            services.AddTransient<IService<City>, CityServices>();
+            services.AddTransient<IMassTimeService, MassTimeServices>();
+            services.AddTransient<ICityService, CityServices>();
         }
 
         private void ConfigureSwagger(IServiceCollection services)

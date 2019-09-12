@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class CityServices : CommonServices, IService<City>
+    public class CityServices : CommonServices, ICityService
     {
         private const string BASE_QUERY = "SELECT Id, Description, ShortDescription FROM City";
 
@@ -17,17 +17,13 @@ namespace masstimes.api.Services
         {
         }
 
-        public async Task<IList<City>> Find(Func<City, bool> predicate = null)
+        public async Task<IList<City>> Find()
         {
             using (IDbConnection conn = Connection)
             {
                 string sQuery = BASE_QUERY;
                 conn.Open();
                 var result = await conn.QueryAsync<City>(sQuery);
-                if(predicate != null)
-                {
-                    return result.Where(predicate).ToList();
-                }
                 return result.ToList();
             }
         }
@@ -40,6 +36,28 @@ namespace masstimes.api.Services
                 conn.Open();
                 var result = await conn.QueryFirstAsync<City>(sQuery, new { ID = id });
                 return result;
+            }
+        }
+
+        public async Task<IList<string>> GetNeighborhood(int id)
+        {
+            using(IDbConnection conn = Connection)
+            {
+                string sQuery = "SELECT DISTINCT(Neighborhood) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY Neighborhood";
+                conn.Open();
+                var result = await conn.QueryAsync<string>(sQuery, new { ID = id });
+                return result.ToList();
+            }
+        }
+
+        public async Task<IList<DateTime>> GetTimes(int id)
+        {
+            using(IDbConnection conn = Connection)
+            {
+                string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY [Time]";
+                conn.Open();
+                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id });
+                return result.ToList();
             }
         }
     }

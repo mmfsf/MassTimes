@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using masstimes.api.Models;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class MassTimeServices : CommonServices, IService<MassTime>
+    public class MassTimeServices : CommonServices, IMassTimeService
     {
         private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood FROM VW_MASSTIMES";
         private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
@@ -18,22 +19,30 @@ namespace masstimes.api.Services
         {
         }
 
-        public async Task<IList<MassTime>> Find(Func<MassTime, bool> predicate = null)
+        public async Task<IList<MassTime>> Find()
         {
             using (IDbConnection conn = Connection)
             {
                 string sQuery = $"{BASE_QUERY} {ORDERBY_QUERY}";
                 conn.Open();
                 var result = await conn.QueryAsync<MassTime>(sQuery);
-                if(predicate != null)
-                {
-                    return result.Where(predicate).ToList();
-                }
+
                 return result.ToList();
             }
         }
 
-        public async Task<MassTime> Get(int id) 
+        public async Task<IList<MassTime>> Find(MassTimeFilter filter)
+        {
+            var where = new StringBuilder("WHERE 1=1 ");
+            where.Append($"AND ISNULL(@City_id, City_id) = City_id");
+            where.Append($"AND ISNULL(@WeekDay_id, WeekDay_id) = WeekDay_id");
+            where.Append($"AND ISNULL(@Neighborhood, Neighborhood) = Neighborhood");
+            where.Append($"AND ISNULL(@Time, [Time]) = [Time]");
+
+            return await Find();
+        }
+
+        public async Task<MassTime> Get(int id)
         {
             using (IDbConnection conn = Connection)
             {

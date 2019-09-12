@@ -7,6 +7,6 @@ namespace masstimes.api.Services
     public interface IService<T>
     {
         Task<T> Get(int id);
-        Task<IList<T>> Find(Func<T, bool> predicate = null);
+        Task<IList<T>> Find();
     }
 }

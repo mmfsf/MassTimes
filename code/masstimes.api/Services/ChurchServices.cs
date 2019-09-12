@@ -17,17 +17,13 @@ namespace masstimes.api.Services
         {
         }
 
-        public async Task<IList<Church>> Find(Func<Church, bool> predicate = null)
+        public async Task<IList<Church>> Find()
         {
             using (IDbConnection conn = Connection)
             {
                 string sQuery = BASE_QUERY;
                 conn.Open();
                 var result = await conn.QueryAsync<Church>(sQuery);
-                if(predicate != null)
-                {
-                    return result.Where(predicate).ToList();
-                }
                 return result.ToList();
             }
         }
@@ -51,11 +47,15 @@ namespace masstimes.api.Services
 
             using (IDbConnection conn = Connection)
             {
-                string sQuery = $"SELECT * from [Address] INNER JOIN Church ON Church.Address_id = [Address].Id WHERE Church.Id = @ID";
+                string sQuery = "SELECT [Address].Id, Complement, Neighborhood, Number, Street, ZipCode " + 
+                                "from [Address] INNER JOIN Church ON Church.Address_id = [Address].Id WHERE Church.Id = @ID";
                 conn.Open();
                 var result = await conn.QueryFirstAsync<Address>(sQuery, new { ID = church.Id });
                 church.Address.Id = result.Id;
+                church.Address.Complement = result.Complement;
                 church.Address.Neighborhood = result.Neighborhood;
+                church.Address.Number = result.Number;
+                church.Address.Street = result.Street;
                 church.Address.ZipCode = result.ZipCode;
             }
         }
