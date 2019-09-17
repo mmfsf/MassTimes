@@ -4,6 +4,6 @@ namespace masstimes.api.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public bool ShortDescription { get; set; }
+        public string ShortDescription { get; set; }
     }
 }
