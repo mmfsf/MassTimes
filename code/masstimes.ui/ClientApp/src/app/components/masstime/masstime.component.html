@@ -1,0 +1,65 @@
+<div class="clr-row">
+  <div class="clr-col-4" *ngFor="let masstime of massetimes">
+    <div class="card">
+      <div class="card-header">
+        {{masstime.church}}
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Horários
+        </div>
+        <div class="card-text">
+
+          <div class="clr-row">
+            <div class="clr-col">
+              <strong>Dom</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Domingo')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Seg</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Segunda')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Ter</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Terça')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Qua</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Quarta')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Qui</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Quinta')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Sex</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Sexta')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+            <div class="clr-col">
+              <strong>Sáb</strong>
+              <p *ngFor="let t of (masstime | filterweekday: 'Sábado')">
+                {{t.time | date: "HH:mm"}}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-footer">
+        {{masstime.address}}, {{masstime.neighborhood}} - {{masstime.city}}
+      </div>
+    </div>
+  </div>
+</div>

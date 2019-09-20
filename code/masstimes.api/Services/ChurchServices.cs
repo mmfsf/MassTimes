@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class ChurchServices : CommonServices, IService<Church>
+    public class ChurchServices : CommonServices, IChurchService
     {
         private const string BASE_QUERY = "SELECT Id, Name FROM Church";
 
@@ -37,6 +37,17 @@ namespace masstimes.api.Services
                 var result = await conn.QueryFirstAsync<Church>(sQuery, new { ID = id });
                 await FillChurchAddress(result);
                 return result;
+            }
+        }
+
+        public async Task<IList<DateTime>> GetTimes(int id)
+        {
+            using(IDbConnection conn = Connection)
+            {
+                string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE Church_id = @ID ORDER BY [Time]";
+                conn.Open();
+                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id });
+                return result.ToList();
             }
         }
 

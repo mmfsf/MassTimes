@@ -1,0 +1,18 @@
+.span-neighborhoods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    border-radius: 3px;
+    background: #D9E4EA;
+    margin: 6px 0;
+    cursor: pointer;
+
+    &:hover {
+        background: #CCCCCC;
+    }
+
+    &-selected {
+        background: #9A9A9A;
+    }
+}

@@ -1,0 +1,42 @@
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+
+@Component({
+    selector: 'app-masstime',
+    templateUrl: './masstime.component.html',
+    styleUrls: ['./masstime.component.scss']
+})
+export class MassTimeComponent implements OnInit {
+
+    public massetimes: Array<any>;
+
+    constructor() {
+        this.massetimes = new Array<any>();
+    }
+
+    ngOnInit() {
+    }
+
+    @Input()
+    set items(values: any) {
+        this.massetimes = [];
+        if (values === undefined) {
+            return;
+        }
+
+        values.map(c => {
+            if (!this.massetimes.some(x => x.church === c.church)) {
+                this.massetimes.push({
+                    church: c.church,
+                    city: c.city,
+                    neighborhood: c.neighborhood,
+                    weekday: c.weekday,
+                    address: c.address.replace(/, null/g, ''),
+                    time: new Array<any>()
+                });
+            } else {
+                const mass = this.massetimes.find(({ church }) => church === c.church);
+                mass.time.push({time: c.time, weekday: c.weekday});
+            }
+        });
+    }
+}

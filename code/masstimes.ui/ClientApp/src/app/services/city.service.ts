@@ -9,11 +9,15 @@ export class CityService {
   constructor(private http: HttpClient) { }
 
   public All(): Observable<HttpResponse<Array<City>>> {
-    return this.http.get<Array<City>>('https://localhost:5000/api/cities', { observe: 'response' });
+    return this.http.get<Array<City>>('http://localhost:5000/api/cities', { observe: 'response' });
+  }
+
+  public GetNeighborhoodByCity(id: number): Observable<HttpResponse<Array<string>>> {
+    return this.http.get<Array<string>>(`http://localhost:5000/api/cities/${id}/neighborhood`, { observe: 'response' });
   }
 
   public Get(id: number): Observable<HttpResponse<City>> {
-    return this.http.get<City>(`https://localhost:5000/api/cities/${id}`, { observe: 'response' });
+    return this.http.get<City>(`http://localhost:5000/api/cities/${id}`, { observe: 'response' });
   }
 
 }

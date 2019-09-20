@@ -1,0 +1,9 @@
+<div [clrLoading]="loading">
+    <div class="clr-row">
+        <div class="clr-col-3" *ngFor="let neighborhood of neighborhoods">
+            <span class="span-neighborhoods" [ngClass]="{'span-neighborhoods-selected': selectedItem === neighborhood}">
+                {{neighborhood}}
+            </span>
+        </div>
+    </div>
+</div>

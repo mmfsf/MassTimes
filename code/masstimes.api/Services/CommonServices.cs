@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace masstimes.api.Services
 {
-    public class CommonServices : ICommonService
+    public abstract class CommonServices
     {
         private readonly IConfiguration _config;
 

@@ -21,13 +21,13 @@ namespace masstimes.api.Controllers
             this.service = service;
         }
 
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
         [Produces("application/json")]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MassTime>>> Get() => Ok(await service.Find());
 
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
         [Produces("application/json")]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<MassTime>>> Filtered(MassTimeFilter filter)
         {
@@ -35,6 +35,7 @@ namespace masstimes.api.Controllers
         }
 
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}")]
         public async Task<ActionResult<MassTime>> Get(int id) => Ok(await service.Get(id));
     }

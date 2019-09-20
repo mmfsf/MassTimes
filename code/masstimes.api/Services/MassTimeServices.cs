@@ -12,7 +12,7 @@ namespace masstimes.api.Services
 {
     public class MassTimeServices : CommonServices, IMassTimeService
     {
-        private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood FROM VW_MASSTIMES";
+        private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood, Address FROM VW_MASSTIMES";
         private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
 
         public MassTimeServices(IConfiguration config) : base(config)
@@ -34,12 +34,27 @@ namespace masstimes.api.Services
         public async Task<IList<MassTime>> Find(MassTimeFilter filter)
         {
             var where = new StringBuilder("WHERE 1=1 ");
-            where.Append($"AND ISNULL(@City_id, City_id) = City_id");
-            where.Append($"AND ISNULL(@WeekDay_id, WeekDay_id) = WeekDay_id");
-            where.Append($"AND ISNULL(@Neighborhood, Neighborhood) = Neighborhood");
-            where.Append($"AND ISNULL(@Time, [Time]) = [Time]");
+            where.Append(" AND ISNULL(@Church_id, Church_id) = Church_id");
+            where.Append(" AND ISNULL(@City_id, City_id) = City_id");
+            where.Append(" AND ISNULL(@WeekDay_id, WeekDay_id) = WeekDay_id");
+            where.Append(" AND ISNULL(@Neighborhood, Neighborhood) = Neighborhood");
+            where.Append(" AND ISNULL(@Time, [Time]) = [Time]");
 
-            return await Find();
+            using (IDbConnection conn = Connection)
+            {
+                string sQuery = $"{BASE_QUERY} {where} {ORDERBY_QUERY}";
+                conn.Open();
+                var result = await conn.QueryAsync<MassTime>(sQuery, new
+                {
+                    Church_id = filter.Church_id,
+                    City_id = filter.City_id,
+                    WeekDay_id = filter.WeekDay_id,
+                    Neighborhood = filter.Neighborhood,
+                    Time = filter.Time
+                });
+
+                return result.ToList();
+            }
         }
 
         public async Task<MassTime> Get(int id)

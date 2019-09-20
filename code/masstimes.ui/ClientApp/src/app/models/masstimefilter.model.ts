@@ -1,8 +1,11 @@
 export class MassTimeFilter {
-    Neighborhood: string;
-    City: string;
-    Weekday: string;
+    neighborhood: string;
+    city: number;
+    weekday: number;
 
-    constructor() {
+    constructor(neighborhood: string, city: number, weekday: number) {
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.weekday = weekday;
     }
 }

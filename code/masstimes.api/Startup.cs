@@ -14,6 +14,8 @@ namespace masstimes.api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +27,18 @@ namespace masstimes.api
         public void ConfigureServices(IServiceCollection services)
         {
             IoC(services);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost.com:3001")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -45,14 +59,14 @@ namespace masstimes.api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MassTime API V1");
             });
 
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseMvc();
         }
 
         private void IoC(IServiceCollection services)
         {
-            services.AddTransient<ICommonService, CommonServices>();
-            services.AddTransient<IService<Church>, ChurchServices>();
+            services.AddTransient<IChurchService, ChurchServices>();
             services.AddTransient<IMassTimeService, MassTimeServices>();
             services.AddTransient<ICityService, CityServices>();
         }

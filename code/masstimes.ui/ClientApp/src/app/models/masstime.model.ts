@@ -1,5 +1,22 @@
 export class MassTime {
+    id: number;
+    time: Date;
+    church: string;
+    weekday: string;
+    shortWeekDay: string;
+    city: string;
+    neighborhood: string;
+    address: string;
 
-    constructor() {
+    constructor(id: number, time: Date, church: string, weekday: string,
+                shortWeekDay: string, city: string, neighborhood: string, address: string) {
+        this.id = id;
+        this.time = time;
+        this.church = church;
+        this.weekday = weekday;
+        this.shortWeekDay = shortWeekDay;
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.address = address;
     }
 }

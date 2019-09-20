@@ -4,6 +4,7 @@ using masstimes.api.Services;
 using masstimes.api.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace masstimes.api.Controllers
 {
@@ -11,13 +12,14 @@ namespace masstimes.api.Controllers
     [ApiController]
     public class ChurchesController : ControllerBase
     {
-        private readonly IService<Church> service;
-        public ChurchesController(IService<Church> service)
+        private readonly IChurchService service;
+        public ChurchesController(IChurchService service)
         {
             this.service = service;
         }
 
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Church>>> Get() => Ok(await service.Find());
 
@@ -26,5 +28,10 @@ namespace masstimes.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<ActionResult<Church>> Get(int id) => Ok(await service.Get(id));
+
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("{id}/times")]
+        public async Task<ActionResult<IEnumerable<DateTime>>> GetTimes(int id) => Ok(await service.GetTimes(id));
     }
 }

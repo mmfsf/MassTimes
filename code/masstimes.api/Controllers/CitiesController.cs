@@ -26,14 +26,18 @@ namespace masstimes.api.Controllers
         public async Task<ActionResult<IEnumerable<City>>> Get() => Ok(await service.Find());
 
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<ActionResult<City>> Get(int id) => Ok(await service.Get(id));
 
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}/neighborhood")]
         public async Task<ActionResult<IEnumerable<string>>> GetNeighborhood(int id) => Ok(await service.GetNeighborhood(id));
 
         [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}/times")]
         public async Task<ActionResult<IEnumerable<DateTime>>> GetTimes(int id) => Ok(await service.GetTimes(id));
         

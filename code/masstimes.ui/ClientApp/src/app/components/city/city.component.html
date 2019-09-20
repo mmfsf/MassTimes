@@ -1,13 +1,17 @@
-<clr-datagrid>
+<clr-datagrid class="datagrid-compact" style="min-height: 35%">
     <clr-dg-column>ID</clr-dg-column>
-    <clr-dg-column>Description</clr-dg-column>
-    <clr-dg-column>Short description</clr-dg-column>
+    <clr-dg-column>
+        Description
+        <clr-dg-string-filter [clrDgStringFilter]="cityFilter"></clr-dg-string-filter>
+    </clr-dg-column>
 
-    <clr-dg-row *ngFor="let city of cities">
+    <clr-dg-row *clrDgItems="let city of cities" [clrDgItem]="city">
         <clr-dg-cell>{{city.id}}</clr-dg-cell>
         <clr-dg-cell>{{city.description}}</clr-dg-cell>
-        <clr-dg-cell>{{city.shortDescription}}</clr-dg-cell>
+        <app-neighborhood *clrIfExpanded [cityId]="city.id" ngProjectAs="clr-dg-row-detail" (OnSelected)="SetNeighborhood($event)"></app-neighborhood>
     </clr-dg-row>
 
     <clr-dg-footer>{{cities.length}} cities</clr-dg-footer>
 </clr-datagrid>
+
+<app-masstime [items]="masstimes"></app-masstime>
