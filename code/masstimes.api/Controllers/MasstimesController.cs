@@ -24,15 +24,7 @@ namespace masstimes.api.Controllers
         [Produces("application/json")]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MassTime>>> Get() => Ok(await service.Find());
-
-        [Produces("application/json")]
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(MassTimeExamples))]
-        [HttpPost]
-        public async Task<ActionResult<IEnumerable<MassTime>>> Filtered(MassTimeFilter filter)
-        {
-            return Ok(await service.Find(filter));
-        }
+        public async Task<ActionResult<IEnumerable<MassTime>>> Get([FromQuery] MassTimeFilter filter) => Ok(await service.Find(filter));
 
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -14,13 +14,7 @@ export class MassTimeService {
   }
 
   public Filter(filter: MassTimeFilter): Observable<HttpResponse<Array<MassTime>>> {
-    return this.http.post<Array<MassTime>>('http://localhost:5000/api/masstimes/',
-      {
-        city_id: filter.city,
-        //WeekDay_id: filter.weekday,
-        Neighborhood: filter.neighborhood
-        //Church_id: filter.Church,
-        //Time: filter.Time
-      }, { observe: 'response' });
+    const query = `?city_id=${filter.city}&neighborhood=${filter.neighborhood}`;
+    return this.http.get<Array<MassTime>>(`http://localhost:5000/api/masstimes/${query}`, { observe: 'response' });
   }
 }
