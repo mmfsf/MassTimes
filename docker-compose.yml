@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  masstimes.api:
+    image: ${DOCKER_REGISTRY}masstimesapi
+    container_name: masstimes-api
+    build:
+      context: .
+      dockerfile: code/masstimes.api/Dockerfile
+    networks:
+      - masstimes-network
+
+  masstimes.ui:
+    image: ${DOCKER_REGISTRY}masstimesui
+    container_name: masstimes-ui
+    build:
+      context: .
+      dockerfile: code/masstimes.ui/Dockerfile
+    depends_on:
+      - masstimes.api
+    networks:
+      - masstimes-network
+
+  masstimes.proxy:
+    image: ${DOCKER_REGISTRY}masstimesproxy
+    container_name: masstimes-proxy
+    build:
+      context: .
+      dockerfile: code/nginx/Dockerfile
+    depends_on:
+      - masstimes.api
+      - masstimes.ui
+    networks:
+      - masstimes-network
+    ports:
+      - '2000:80'
+      - '2001:443'
+
+networks:
+  masstimes-network:
+
+networks:
+  masstimes-network:
+    driver: bridge

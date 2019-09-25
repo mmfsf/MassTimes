@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 import { MassTime } from '../models/masstime.model';
 import { MassTimeFilter } from '../models/masstimefilter.model';
 
@@ -10,11 +12,10 @@ export class MassTimeService {
   constructor(private http: HttpClient) { }
 
   public All(): Observable<HttpResponse<Array<MassTime>>> {
-    return this.http.get<Array<MassTime>>('http://localhost:5000/api/masstimes', { observe: 'response' });
+    return this.http.get<Array<MassTime>>(`${environment.apiUrl}/masstimes`, { observe: 'response' });
   }
 
   public Filter(filter: MassTimeFilter): Observable<HttpResponse<Array<MassTime>>> {
-    const query = `?city_id=${filter.city}&neighborhood=${filter.neighborhood}`;
-    return this.http.get<Array<MassTime>>(`http://localhost:5000/api/masstimes/${query}`, { observe: 'response' });
+    return this.http.get<Array<MassTime>>(`${environment.apiUrl}/masstimes/${filter.buildQueryString()}`, { observe: 'response' });
   }
 }

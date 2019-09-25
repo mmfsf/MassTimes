@@ -11,7 +11,7 @@ namespace masstimes.api.Services
 {
     public class ChurchServices : CommonServices, IChurchService
     {
-        private const string BASE_QUERY = "SELECT Id, Name FROM Church";
+        private const string BASE_QUERY = "SELECT Id, [Name] FROM Church";
 
         public ChurchServices(IConfiguration config) : base(config)
         {

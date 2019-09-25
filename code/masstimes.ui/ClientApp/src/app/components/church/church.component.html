@@ -1,0 +1,16 @@
+<app-masstime [items]="masstimes"></app-masstime>
+
+<clr-datagrid class="datagrid-compact" [(clrDgSelected)]="selected" (clrDgSelectedChange)="selectionChanged($event)" [clrDgRowSelection]="true">
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>
+    Nome
+    <clr-dg-string-filter [clrDgStringFilter]="churchFilter"></clr-dg-string-filter>
+  </clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let church of churches" [clrDgItem]="church">
+    <clr-dg-cell>{{church.id}}</clr-dg-cell>
+    <clr-dg-cell>{{church.name}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{churches.length}} Igrejas</clr-dg-footer>
+</clr-datagrid>

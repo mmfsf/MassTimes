@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  masstimes.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development # dev uses UserSecrets with default configuration
+      - ASPNETCORE_URLS=https://+;http://+ # Default ports are 80 and 443
+      - ASPNETCORE_HTTPS_PORT=5001 # This tells the UseHttpsRedirection middleware where to redirect
+    ports:
+      - "5000:80"
+      - "5001:443"
+    volumes:
+      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+
+  masstimes.ui:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development # dev uses UserSecrets with default configuration
+      - ASPNETCORE_URLS=https://+;http://+ # Default ports are 80 and 443
+      - ASPNETCORE_HTTPS_PORT=3001 # This tells the UseHttpsRedirection middleware where to redirect
+    ports:
+      - "3000:80"
+      - "3001:443"
+    volumes:
+      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+
+    

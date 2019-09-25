@@ -1,19 +1,16 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-masstime',
     templateUrl: './masstime.component.html',
     styleUrls: ['./masstime.component.scss']
 })
-export class MassTimeComponent implements OnInit {
+export class MassTimeComponent {
 
     public massetimes: Array<any>;
 
     constructor() {
         this.massetimes = new Array<any>();
-    }
-
-    ngOnInit() {
     }
 
     @Input()

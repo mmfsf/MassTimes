@@ -32,7 +32,7 @@ export class CityComponent implements OnInit {
   }
 
   public SetNeighborhood(event) {
-    const filter = new MassTimeFilter(event.neighborhood, event.city, null);
+    const filter = new MassTimeFilter(event.neighborhood, event.city, null, null);
     this.FillMassTimes(filter);
   }
 
