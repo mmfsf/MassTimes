@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "masstimes.api", "..\masstimes.api\masstimes.api.csproj", "{02398C3A-E180-4764-9199-63C877CE991B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "masstimes.ui", "..\masstimes.ui\masstimes.ui.csproj", "{10D8F55D-2651-4431-A030-5D1C7829DF33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02398C3A-E180-4764-9199-63C877CE991B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02398C3A-E180-4764-9199-63C877CE991B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02398C3A-E180-4764-9199-63C877CE991B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02398C3A-E180-4764-9199-63C877CE991B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D8F55D-2651-4431-A030-5D1C7829DF33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D8F55D-2651-4431-A030-5D1C7829DF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D8F55D-2651-4431-A030-5D1C7829DF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D8F55D-2651-4431-A030-5D1C7829DF33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DBE791AA-63CA-49FA-8781-0E1C49CCA901}
+	EndGlobalSection
+EndGlobal

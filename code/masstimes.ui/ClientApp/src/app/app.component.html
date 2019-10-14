@@ -2,14 +2,15 @@
   <div class="main-container">
     <header class="header header-6">
       <div class="branding">
-        <a href="..." class="nav-link">
-          <clr-icon shape="vm-bug"></clr-icon>
+        <a routerLink="/" class="nav-link" routerLinkActive="active">
+          <!-- <clr-icon shape="home" class="is-solid"></clr-icon> -->
+          <img src="assets/masstimeicon.svg" class="masstimeicon">
           <span class="title">{{title}}</span>
         </a>
       </div>
       <div class="header-nav">
-        <a routerLink="/cities" routerLinkActive="active" class="active nav-link nav-text">Cidades</a>
-        <a routerLink="/churches" routerLinkActive="active" class="active nav-link nav-text">Igrejas</a>
+        <a routerLink="/cities" routerLinkActive="active" class="nav-link nav-text">Cidades</a>
+        <a routerLink="/churches" routerLinkActive="active" class="nav-link nav-text">Igrejas</a>
       </div>
     </header>
     <div class="content-container">

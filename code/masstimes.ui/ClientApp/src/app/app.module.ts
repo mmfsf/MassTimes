@@ -11,6 +11,7 @@ import { NeighborhoodComponent } from './components/neighborhood/neighborhood.co
 import { MassTimeComponent } from './components/masstime/masstime.component';
 import { AppComponent } from './app.component';
 import { ChurchComponent } from './components/church/church.component';
+import { HomeComponent } from './components/home/home.component';
 
 // Interceptors
 import { HttpBaseInterceptor } from './inteceptors/http-base.interceptor';
@@ -25,6 +26,10 @@ import { FilterWeekdayPipe } from './components/pipes/filter.pipe';
 
 const appRoutes: Routes = [
   {
+    path: '',
+    component: HomeComponent
+  },
+  {
     path: 'cities',
     component: CityComponent
   },
@@ -37,6 +42,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     CityComponent,
     NeighborhoodComponent,
     MassTimeComponent,
