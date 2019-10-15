@@ -63,7 +63,10 @@ namespace masstimes.ui
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    var isDocker = System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+                    if(!isDocker) {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
                 }
             });
         }

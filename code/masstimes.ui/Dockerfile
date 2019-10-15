@@ -23,7 +23,9 @@ RUN apt-get update && \
     wget -qO- https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y build-essential nodejs
 RUN npm install -g @angular/cli
+
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 WORKDIR /app
 COPY --from=build /app/out .
+
 ENTRYPOINT ["dotnet", "masstimes.ui.dll"]
