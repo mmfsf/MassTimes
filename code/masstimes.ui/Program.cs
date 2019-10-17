@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace masstimes.ui
 {
@@ -19,6 +14,7 @@ namespace masstimes.ui
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                // .UseContentRoot(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                 .UseStartup<Startup>();
     }
 }

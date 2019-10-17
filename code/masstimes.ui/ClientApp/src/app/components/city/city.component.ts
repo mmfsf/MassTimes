@@ -15,7 +15,7 @@ import { CityFilter } from './city.filter';
   styleUrls: ['./city.component.scss']
 })
 export class CityComponent implements OnInit {
-  private cityFilter = new CityFilter();
+  public cityFilter = new CityFilter();
 
   public cities: Array<City>;
   public selectedNeighborhood: string;

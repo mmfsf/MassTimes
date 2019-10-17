@@ -13,7 +13,7 @@ import { MassTimeService } from 'src/app/services/masstime.service';
     styleUrls: ['./church.component.scss']
 })
 export class ChurchComponent implements OnInit {
-    private churchFilter = new ChurchFilter();
+    public churchFilter = new ChurchFilter();
 
     public churches: Array<Church>;
     public masstimes: Array<MassTime>;
