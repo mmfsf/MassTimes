@@ -25,6 +25,6 @@ export class HttpBaseInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       tap(event => { }, error => { console.log(error); })
-    )
+    );
   }
 }
