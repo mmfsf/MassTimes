@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using masstimes.api.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace masstimes.api.Services
 {
@@ -13,7 +14,7 @@ namespace masstimes.api.Services
     {
         private const string BASE_QUERY = "SELECT Id, Description, ShortDescription FROM City";
 
-        public CityServices(IConfiguration config) : base(config)
+        public CityServices(IConfiguration config, ILogger<CityServices> logger) : base(config, logger)
         {
         }
 
@@ -23,7 +24,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = BASE_QUERY;
                 conn.Open();
-                var result = await conn.QueryAsync<City>(sQuery);
+                var result = await conn.QueryAsync<City>(sQuery).ConfigureAwait(false);
                 return result.ToList();
             }
         }
@@ -34,7 +35,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
                 conn.Open();
-                var result = await conn.QueryFirstAsync<City>(sQuery, new { ID = id });
+                var result = await conn.QueryFirstAsync<City>(sQuery, new { ID = id }).ConfigureAwait(false);
                 return result;
             }
         }
@@ -45,7 +46,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = "SELECT DISTINCT(Neighborhood) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY Neighborhood";
                 conn.Open();
-                var result = await conn.QueryAsync<string>(sQuery, new { ID = id });
+                var result = await conn.QueryAsync<string>(sQuery, new { ID = id }).ConfigureAwait(false);
                 return result.ToList();
             }
         }
@@ -56,7 +57,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY [Time]";
                 conn.Open();
-                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id });
+                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
                 return result.ToList();
             }
         }

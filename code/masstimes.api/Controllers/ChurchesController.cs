@@ -13,6 +13,7 @@ namespace masstimes.api.Controllers
     public class ChurchesController : ControllerBase
     {
         private readonly IChurchService service;
+
         public ChurchesController(IChurchService service)
         {
             this.service = service;

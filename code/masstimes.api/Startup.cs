@@ -1,13 +1,12 @@
 ﻿using System;
 using masstimes.api.Controllers.Examples;
-using masstimes.api.Models;
 using masstimes.api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -34,14 +33,21 @@ namespace masstimes.api
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost.com:3001")
+                    builder.WithOrigins(Configuration.GetValue<string>("AllowedHosts"))
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowAnyOrigin();
+                        .AllowAnyOrigin()
+                        .SetIsOriginAllowedToAllowWildcardSubdomains();
                 });
             });
 
             services.AddControllers();
+
+            services.AddLogging(config =>
+            {
+                config.AddDebug();
+                config.AddConsole();
+            });
 
             ConfigureSwagger(services);
         }

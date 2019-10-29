@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using masstimes.api.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace masstimes.api.Services
 {
@@ -15,7 +16,7 @@ namespace masstimes.api.Services
         private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood, Address FROM VW_MASSTIMES";
         private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
 
-        public MassTimeServices(IConfiguration config) : base(config)
+        public MassTimeServices(IConfiguration config, ILogger<MassTimeServices> logger) : base(config, logger)
         {
         }
 
@@ -25,7 +26,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = $"{BASE_QUERY} {ORDERBY_QUERY}";
                 conn.Open();
-                var result = await conn.QueryAsync<MassTime>(sQuery);
+                var result = await conn.QueryAsync<MassTime>(sQuery).ConfigureAwait(false);
 
                 return result.ToList();
             }
@@ -51,7 +52,7 @@ namespace masstimes.api.Services
                     WeekDay_id = filter.WeekDay_id,
                     Neighborhood = filter.Neighborhood,
                     Time = filter.Time
-                });
+                }).ConfigureAwait(false);
 
                 return result.ToList();
             }
@@ -63,7 +64,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = $"{BASE_QUERY} WHERE Id = @ID {ORDERBY_QUERY}";
                 conn.Open();
-                var result = await conn.QueryFirstAsync<MassTime>(sQuery, new { ID = id });
+                var result = await conn.QueryFirstAsync<MassTime>(sQuery, new { ID = id }).ConfigureAwait(false);
                 return result;
             }
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using masstimes.api.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace masstimes.api.Services
 {
@@ -13,18 +14,26 @@ namespace masstimes.api.Services
     {
         private const string BASE_QUERY = "SELECT Id, [Name] FROM Church";
 
-        public ChurchServices(IConfiguration config) : base(config)
+        public ChurchServices(IConfiguration config, ILogger<ChurchServices> logger) : base(config, logger)
         {
         }
 
         public async Task<IList<Church>> Find()
         {
-            using (IDbConnection conn = Connection)
+            try
             {
-                string sQuery = BASE_QUERY;
-                conn.Open();
-                var result = await conn.QueryAsync<Church>(sQuery);
-                return result.ToList();
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = BASE_QUERY;
+                    conn.Open();
+                    var result = await conn.QueryAsync<Church>(sQuery).ConfigureAwait(false);
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
             }
         }
 
@@ -34,8 +43,8 @@ namespace masstimes.api.Services
             {
                 string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
                 conn.Open();
-                var result = await conn.QueryFirstAsync<Church>(sQuery, new { ID = id });
-                await FillChurchAddress(result);
+                var result = await conn.QueryFirstAsync<Church>(sQuery, new { ID = id }).ConfigureAwait(false);
+                await FillChurchAddress(result).ConfigureAwait(false);
                 return result;
             }
         }
@@ -46,7 +55,7 @@ namespace masstimes.api.Services
             {
                 string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE Church_id = @ID ORDER BY [Time]";
                 conn.Open();
-                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id });
+                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
                 return result.ToList();
             }
         }
@@ -61,7 +70,7 @@ namespace masstimes.api.Services
                 string sQuery = "SELECT [Address].Id, Complement, Neighborhood, Number, Street, ZipCode " + 
                                 "from [Address] INNER JOIN Church ON Church.Address_id = [Address].Id WHERE Church.Id = @ID";
                 conn.Open();
-                var result = await conn.QueryFirstAsync<Address>(sQuery, new { ID = church.Id });
+                var result = await conn.QueryFirstAsync<Address>(sQuery, new { ID = church.Id }).ConfigureAwait(false);
                 church.Address.Id = result.Id;
                 church.Address.Complement = result.Complement;
                 church.Address.Neighborhood = result.Neighborhood;
