@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using masstimes.api.Controllers.Examples;
 using masstimes.api.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -61,8 +64,7 @@ namespace masstimes.api
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                AppExceptionHandler(app);
                 app.UseHsts();
             }
 
@@ -83,14 +85,45 @@ namespace masstimes.api
             });
         }
 
-        private void IoC(IServiceCollection services)
+        private static void AppExceptionHandler(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(errorApp =>
+            {
+                errorApp.Run(async context =>
+                {
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "text/html";
+
+                    await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
+                    await context.Response.WriteAsync("ERROR!<br><br>\r\n");
+
+                    var exceptionHandlerPathFeature =
+                        context.Features.Get<IExceptionHandlerPathFeature>();
+
+                    var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+
+                    await context.Response.WriteAsync($"<p>{exceptionHandlerFeature?.Error}</p>");
+
+                    if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+                    {
+                        await context.Response.WriteAsync("File error thrown!<br><br>\r\n");
+                    }
+
+                    await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
+                    await context.Response.WriteAsync("</body></html>\r\n");
+                    await context.Response.WriteAsync(new string(' ', 512)); // IE padding
+                });
+            });
+        }
+
+        private static void IoC(IServiceCollection services)
         {
             services.AddTransient<IChurchService, ChurchServices>();
             services.AddTransient<IMassTimeService, MassTimeServices>();
             services.AddTransient<ICityService, CityServices>();
         }
 
-        private void ConfigureSwagger(IServiceCollection services)
+        private static void ConfigureSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
                         {
