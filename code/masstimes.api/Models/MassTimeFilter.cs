@@ -8,6 +8,6 @@ namespace masstimes.api.Models
         public int? City_id { get; set; }
         public int? WeekDay_id { get; set; }
         public string Neighborhood { get; set; }
-        public DateTime? Time { get; set; }
+        public string Time { get; set; }
     }
 }

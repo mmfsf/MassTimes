@@ -1,6 +1,6 @@
 export class MassTime {
     id: number;
-    time: Date;
+    time: any;
     church: string;
     weekday: string;
     shortWeekDay: string;
@@ -8,7 +8,7 @@ export class MassTime {
     neighborhood: string;
     address: string;
 
-    constructor(id: number, time: Date, church: string, weekday: string,
+    constructor(id: number, time: any, church: string, weekday: string,
                 shortWeekDay: string, city: string, neighborhood: string, address: string) {
         this.id = id;
         this.time = time;
