@@ -37,7 +37,7 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet build ./code/masstimes.ui --configuration Release
-          dotnet publish ./code/masstimes.ui -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+          dotnet publish ./code/masstimes.ui -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/masstimes' 
           
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -45,6 +45,4 @@ jobs:
         with: 
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZURE_CREDENTIALS  }} # Define secret variable in repository settings as per action documentation
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
-
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/masstimes'
