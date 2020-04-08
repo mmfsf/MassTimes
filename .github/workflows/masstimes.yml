@@ -1,0 +1,3 @@
+- uses: azure/masstimes-deploy@v1
+      with:
+        creds: ${{ secrets.masstimesPublishProfile }}
