@@ -7,11 +7,18 @@
     <UserSecretsId>a298df8a-2b32-4564-b207-36a1e17c5c30</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="appsettings.Production.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appsettings.Production.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; content files; analyzers; build transitive</IncludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
