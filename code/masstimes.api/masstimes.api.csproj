@@ -7,22 +7,13 @@
     <UserSecretsId>a298df8a-2b32-4564-b207-36a1e17c5c30</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <PackageReference Include="Dapper" Version="2.0.35" />
-=======
-    <PackageReference Include="Dapper" Version="2.0.30" />
->>>>>>> 63171235e26c4d0cb6973567389df439f9347d57
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets>runtime; build; native; content files; analyzers; build transitive</IncludeAssets>
     </PackageReference>
-<<<<<<< HEAD
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.0" />
-=======
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.2" />
->>>>>>> 63171235e26c4d0cb6973567389df439f9347d57
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 </Project>
