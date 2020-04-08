@@ -16,6 +16,6 @@ export class MassTimeService {
   }
 
   public Filter(filter: MassTimeFilter): Observable<HttpResponse<Array<MassTime>>> {
-    return this.http.get<Array<MassTime>>(`${environment.apiUrl}/masstimes/${filter.buildQueryString()}`, { observe: 'response' });
+    return this.http.get<Array<MassTime>>(`${environment.apiUrl}/masstimes${filter.buildQueryString()}`, { observe: 'response' });
   }
 }

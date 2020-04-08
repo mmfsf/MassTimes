@@ -14,43 +14,43 @@
             <div class="clr-col">
               <strong>Dom</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Domingo')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Seg</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Segunda')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Ter</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Terça')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Qua</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Quarta')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Qui</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Quinta')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Sex</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Sexta')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
             <div class="clr-col">
               <strong>Sáb</strong>
               <p *ngFor="let t of (masstime | filterweekday: 'Sábado')">
-                {{t.time | date: "HH:mm"}}
+                {{t.time.hours.toString().padStart(2, '0')}}:{{t.time.minutes.toString().padStart(2, '0')}}
               </p>
             </div>
           </div>

@@ -13,7 +13,7 @@ namespace masstimes.api.Services
 {
     public class MassTimeServices : CommonServices, IMassTimeService
     {
-        private const string BASE_QUERY = "SELECT Id, Time, Name as Church, Weekday, ShortWeekDay, City, Neighborhood, Address FROM VW_MASSTIMES";
+        private const string BASE_QUERY = "SELECT Id, [Time], [Name] as Church, [Weekday], [ShortWeekDay], [City], [Neighborhood], [Address] FROM VW_MASSTIMES";
         private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
 
         public MassTimeServices(IConfiguration config, ILogger<MassTimeServices> logger) : base(config, logger)
@@ -47,11 +47,11 @@ namespace masstimes.api.Services
                 conn.Open();
                 var result = await conn.QueryAsync<MassTime>(sQuery, new
                 {
-                    Church_id = filter.Church_id,
-                    City_id = filter.City_id,
-                    WeekDay_id = filter.WeekDay_id,
-                    Neighborhood = filter.Neighborhood,
-                    Time = filter.Time
+                    filter.Church_id,
+                    filter.City_id,
+                    filter.WeekDay_id,
+                    filter.Neighborhood,
+                    filter.Time
                 }).ConfigureAwait(false);
 
                 return result.ToList();
