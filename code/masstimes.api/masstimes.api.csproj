@@ -5,6 +5,7 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <UserSecretsId>a298df8a-2b32-4564-b207-36a1e17c5c30</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/881c674e-4856-45aa-83d5-9dd2948e02e1/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/masstimes.api</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="appsettings.Production.json" />
@@ -14,13 +15,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>

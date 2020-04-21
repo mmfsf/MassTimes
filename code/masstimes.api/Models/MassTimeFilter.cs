@@ -1,5 +1,3 @@
-using System;
-
 namespace masstimes.api.Models
 {
     public class MassTimeFilter
@@ -9,5 +7,6 @@ namespace masstimes.api.Models
         public int? WeekDay_id { get; set; }
         public string Neighborhood { get; set; }
         public string Time { get; set; }
+        public string Church_Name { get; set; }
     }
 }

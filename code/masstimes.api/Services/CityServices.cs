@@ -1,12 +1,12 @@
+using Dapper;
+using masstimes.api.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using masstimes.api.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace masstimes.api.Services
 {
@@ -20,46 +20,58 @@ namespace masstimes.api.Services
 
         public async Task<IList<City>> Find()
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = BASE_QUERY;
-                conn.Open();
-                var result = await conn.QueryAsync<City>(sQuery).ConfigureAwait(false);
-                return result.ToList();
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = BASE_QUERY;
+                    conn.Open();
+                    var result = await conn.QueryAsync<City>(sQuery).ConfigureAwait(false);
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
 
-        public async Task<City> Get(int id) 
+        public async Task<City> Get(int id)
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
-                conn.Open();
-                var result = await conn.QueryFirstAsync<City>(sQuery, new { ID = id }).ConfigureAwait(false);
-                return result;
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
+                    conn.Open();
+                    var result = await conn.QueryFirstAsync<City>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result;
+                }
+            }).ConfigureAwait(false);
         }
 
         public async Task<IList<string>> GetNeighborhood(int id)
         {
-            using(IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = "SELECT DISTINCT(Neighborhood) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY Neighborhood";
-                conn.Open();
-                var result = await conn.QueryAsync<string>(sQuery, new { ID = id }).ConfigureAwait(false);
-                return result.ToList();
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = "SELECT DISTINCT(Neighborhood) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY Neighborhood";
+                    conn.Open();
+                    var result = await conn.QueryAsync<string>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
 
         public async Task<IList<DateTime>> GetTimes(int id)
         {
-            using(IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY [Time]";
-                conn.Open();
-                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
-                return result.ToList();
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY [Time]";
+                    conn.Open();
+                    var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
     }
 }
