@@ -1,23 +1,20 @@
-﻿using System;
-using System.IO;
-using masstimes.api.Controllers.Examples;
+﻿using masstimes.api.Controllers.Examples;
 using masstimes.api.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System;
 
 namespace masstimes.api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)
         {
@@ -53,6 +50,7 @@ namespace masstimes.api
             });
 
             ConfigureSwagger(services);
+            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +62,7 @@ namespace masstimes.api
             }
             else
             {
-                AppExceptionHandler(app);
+                AppExceptionHandler.ExceptionHandler(app);
                 app.UseHsts();
             }
 
@@ -85,37 +83,6 @@ namespace masstimes.api
             });
         }
 
-        private static void AppExceptionHandler(IApplicationBuilder app)
-        {
-            app.UseExceptionHandler(errorApp =>
-            {
-                errorApp.Run(async context =>
-                {
-                    context.Response.StatusCode = 500;
-                    context.Response.ContentType = "text/html";
-
-                    await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
-                    await context.Response.WriteAsync("ERROR!<br><br>\r\n");
-
-                    var exceptionHandlerPathFeature =
-                        context.Features.Get<IExceptionHandlerPathFeature>();
-
-                    var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-
-                    await context.Response.WriteAsync($"<p>{exceptionHandlerFeature?.Error}</p>");
-
-                    if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
-                    {
-                        await context.Response.WriteAsync("File error thrown!<br><br>\r\n");
-                    }
-
-                    await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
-                    await context.Response.WriteAsync("</body></html>\r\n");
-                    await context.Response.WriteAsync(new string(' ', 512)); // IE padding
-                });
-            });
-        }
-
         private static void IoC(IServiceCollection services)
         {
             services.AddTransient<IChurchService, ChurchServices>();
@@ -131,7 +98,7 @@ namespace masstimes.api
                             {
                                 Title = "MassTime API",
                                 Version = "v1",
-                                Description = "A simple API to provide informantion about mass times arround the world",
+                                Description = "A simple API to provide information about mass times around the world",
                                 Contact = new OpenApiContact
                                 {
                                     Name = "Marcos Farias",

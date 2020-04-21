@@ -1,12 +1,12 @@
+using Dapper;
+using masstimes.api.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using masstimes.api.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace masstimes.api.Services
 {
@@ -29,7 +29,7 @@ namespace masstimes.api.Services
             }
         }
 
-        public async Task<City> Get(int id) 
+        public async Task<City> Get(int id)
         {
             using (IDbConnection conn = Connection)
             {
@@ -42,7 +42,7 @@ namespace masstimes.api.Services
 
         public async Task<IList<string>> GetNeighborhood(int id)
         {
-            using(IDbConnection conn = Connection)
+            using (IDbConnection conn = Connection)
             {
                 string sQuery = "SELECT DISTINCT(Neighborhood) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY Neighborhood";
                 conn.Open();
@@ -53,7 +53,7 @@ namespace masstimes.api.Services
 
         public async Task<IList<DateTime>> GetTimes(int id)
         {
-            using(IDbConnection conn = Connection)
+            using (IDbConnection conn = Connection)
             {
                 string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE City_id = @ID ORDER BY [Time]";
                 conn.Open();

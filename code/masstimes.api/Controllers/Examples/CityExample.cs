@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
 using masstimes.api.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Collections.Generic;
 
 namespace masstimes.api.Controllers.Examples
 {
@@ -11,12 +10,12 @@ namespace masstimes.api.Controllers.Examples
         {
             return new List<City>
             {
-                new City { 
+                new City {
                     Id = 1,
                     Description = "Recife",
                     ShortDescription = "REC"
                 },
-                new City { 
+                new City {
                     Id = 2,
                     Description = "Petrolina",
                     ShortDescription = "PET"

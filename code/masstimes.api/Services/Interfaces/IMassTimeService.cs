@@ -1,6 +1,6 @@
+using masstimes.api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using masstimes.api.Models;
 
 namespace masstimes.api.Services
 {

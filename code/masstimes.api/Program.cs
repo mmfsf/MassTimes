@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace masstimes.api
 {
@@ -12,23 +12,23 @@ namespace masstimes.api
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((context, config) =>
             {
-                var builtConfig = config.Build();
+                if (!context.HostingEnvironment.IsDevelopment())
+                {
+                    var builtConfig = config.Build();
 
-                config.AddAzureKeyVault(
-                    builtConfig["AzureKeyVault:DNS"],
-                    builtConfig["AzureKeyVault:ClientId"],
-                    builtConfig["AzureKeyVault:ClientSecret"]
-                );
-            })
-            .ConfigureLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.AddConsole();
+                    config.AddAzureKeyVault(
+                        builtConfig["AzureKeyVault:DNS"],
+                        builtConfig["AzureKeyVault:ClientId"],
+                        builtConfig["AzureKeyVault:ClientSecret"]
+                    );
+                }
             })
             .UseStartup<Startup>();
+        }
     }
 }
