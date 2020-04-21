@@ -20,7 +20,7 @@ namespace masstimes.api.Services
 
         public async Task<IList<Church>> Find()
         {
-            try
+            return await Execute(async () =>
             {
                 using (IDbConnection conn = Connection)
                 {
@@ -29,35 +29,36 @@ namespace masstimes.api.Services
                     var result = await conn.QueryAsync<Church>(sQuery).ConfigureAwait(false);
                     return result.ToList();
                 }
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError(ex.Message);
-                throw;
-            }
+            }).ConfigureAwait(false);
         }
 
         public async Task<Church> Get(int id)
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
-                conn.Open();
-                var result = await conn.QueryFirstAsync<Church>(sQuery, new { ID = id }).ConfigureAwait(false);
-                await FillChurchAddress(result).ConfigureAwait(false);
-                return result;
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = $"{BASE_QUERY} WHERE Id = @ID";
+                    conn.Open();
+                    var result = await conn.QueryFirstAsync<Church>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    await FillChurchAddress(result).ConfigureAwait(false);
+                    return result;
+                }
+            }).ConfigureAwait(false);
         }
 
         public async Task<IList<DateTime>> GetTimes(int id)
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE Church_id = @ID ORDER BY [Time]";
-                conn.Open();
-                var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
-                return result.ToList();
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = " SELECT DISTINCT([Time]) FROM VW_MASSTIMES WHERE Church_id = @ID ORDER BY [Time]";
+                    conn.Open();
+                    var result = await conn.QueryAsync<DateTime>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
 
         private async Task FillChurchAddress(Church church)

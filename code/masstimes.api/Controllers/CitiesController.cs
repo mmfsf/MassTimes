@@ -3,6 +3,7 @@ using masstimes.api.Models;
 using masstimes.api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace masstimes.api.Controllers
     [ApiController]
     public class CitiesController : ControllerBase
     {
+        private readonly ILogger logger;
         private readonly ICityService service;
 
-        public CitiesController(ICityService service)
+        public CitiesController(ICityService service, ILogger<CitiesController> logger)
         {
+            this.logger = logger;
             this.service = service;
         }
 

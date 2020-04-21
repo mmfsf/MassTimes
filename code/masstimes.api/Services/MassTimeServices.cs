@@ -21,14 +21,17 @@ namespace masstimes.api.Services
 
         public async Task<IList<MassTime>> Find()
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = $"{BASE_QUERY} {ORDERBY_QUERY}";
-                conn.Open();
-                var result = await conn.QueryAsync<MassTime>(sQuery).ConfigureAwait(false);
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = $"{BASE_QUERY} {ORDERBY_QUERY}";
+                    conn.Open();
+                    var result = await conn.QueryAsync<MassTime>(sQuery).ConfigureAwait(false);
 
-                return result.ToList();
-            }
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
 
         public async Task<IList<MassTime>> Find(MassTimeFilter filter)
@@ -40,32 +43,38 @@ namespace masstimes.api.Services
             where.Append(" AND ISNULL(@Neighborhood, Neighborhood) = Neighborhood");
             where.Append(" AND ISNULL(@Time, [Time]) = [Time]");
 
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = $"{BASE_QUERY} {where} {ORDERBY_QUERY}";
-                conn.Open();
-                var result = await conn.QueryAsync<MassTime>(sQuery, new
+                using (IDbConnection conn = Connection)
                 {
-                    filter.Church_id,
-                    filter.City_id,
-                    filter.WeekDay_id,
-                    filter.Neighborhood,
-                    filter.Time
-                }).ConfigureAwait(false);
+                    string sQuery = $"{BASE_QUERY} {where} {ORDERBY_QUERY}";
+                    conn.Open();
+                    var result = await conn.QueryAsync<MassTime>(sQuery, new
+                    {
+                        filter.Church_id,
+                        filter.City_id,
+                        filter.WeekDay_id,
+                        filter.Neighborhood,
+                        filter.Time
+                    }).ConfigureAwait(false);
 
-                return result.ToList();
-            }
+                    return result.ToList();
+                }
+            }).ConfigureAwait(false);
         }
 
         public async Task<MassTime> Get(int id)
         {
-            using (IDbConnection conn = Connection)
+            return await Execute(async () =>
             {
-                string sQuery = $"{BASE_QUERY} WHERE Id = @ID {ORDERBY_QUERY}";
-                conn.Open();
-                var result = await conn.QueryFirstAsync<MassTime>(sQuery, new { ID = id }).ConfigureAwait(false);
-                return result;
-            }
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = $"{BASE_QUERY} WHERE Id = @ID {ORDERBY_QUERY}";
+                    conn.Open();
+                    var result = await conn.QueryFirstAsync<MassTime>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result;
+                }
+            }).ConfigureAwait(false);
         }
     }
 }

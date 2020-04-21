@@ -2,6 +2,7 @@ using masstimes.api.Models;
 using masstimes.api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace masstimes.api.Controllers
     [ApiController]
     public class ChurchesController : ControllerBase
     {
+        private readonly ILogger logger;
         private readonly IChurchService service;
 
-        public ChurchesController(IChurchService service)
+        public ChurchesController(IChurchService service, ILogger<ChurchesController> logger)
         {
+            this.logger = logger;
             this.service = service;
         }
 

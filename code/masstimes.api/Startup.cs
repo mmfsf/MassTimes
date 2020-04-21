@@ -47,6 +47,7 @@ namespace masstimes.api
             {
                 config.AddDebug();
                 config.AddConsole();
+                config.AddApplicationInsights();
             });
 
             ConfigureSwagger(services);
