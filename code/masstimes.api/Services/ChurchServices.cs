@@ -61,6 +61,20 @@ namespace masstimes.api.Services
             }).ConfigureAwait(false);
         }
 
+        public async Task<Gallery> GetGallery(int id)
+        {
+            return await Execute(async () =>
+            {
+                using (IDbConnection conn = Connection)
+                {
+                    string sQuery = "SELECT Gallery.Id, [Thumb] FROM Gallery INNER JOIN Church ON Church.Id = @ID";
+                    conn.Open();
+                    var result = await conn.QueryFirstAsync<Gallery>(sQuery, new { ID = id }).ConfigureAwait(false);
+                    return result;
+                }
+            }).ConfigureAwait(false);
+        }
+
         private async Task FillChurchAddress(Church church)
         {
             if (church == null)
