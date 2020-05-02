@@ -1,0 +1,16 @@
+.card-header {
+  .card-img {
+    display: inline-block;
+
+    img {
+      width: 50%;
+      max-width: 50%;
+    }
+  }
+
+  p {
+    display: inline-block;
+    width: 50%;
+    max-width: 50%;
+  }
+}
