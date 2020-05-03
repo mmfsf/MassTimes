@@ -2,7 +2,12 @@
   <div class="clr-col-4" *ngFor="let masstime of massetimes">
     <div class="card">
       <div class="card-header">
-        {{masstime.church}}
+        <div class="card-img">
+          <img src="{{masstime.thumb}}">
+        </div>
+        <p>
+          {{masstime.church}}
+        </p>
       </div>
       <div class="card-block">
         <div class="card-title">

@@ -14,9 +14,11 @@ AS
 		[City].Description AS City,
 		(ISNULL([Address].Street, 'null') + ', ' + ISNULL([Address].Number, 'null') + ', ' + ISNULL([Address].ZipCode, 'null')) as [Address],
 		[Address].Id as Address_id,
-		[Address].Neighborhood
+		[Address].Neighborhood,
+		[Gallery].Thumb
 	FROM MassTime
 	inner join Church on Church.Id = MassTime.Church_id
 	inner join [Address] on [Address].Id = Church.Address_id
 	inner join City on City.Id = [Address].City_id
 	inner join [WeekDay] on [WeekDay].Id = MassTime.WeekDay_id
+	left join [Gallery] on Gallery.Id = Church.Gallery_id

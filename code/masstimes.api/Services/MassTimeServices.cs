@@ -12,7 +12,7 @@ namespace masstimes.api.Services
 {
     public class MassTimeServices : CommonServices, IMassTimeService
     {
-        private const string BASE_QUERY = "SELECT Id, [Time], [Name] as Church, [Weekday], [ShortWeekDay], [City], [Neighborhood], [Address] FROM VW_MASSTIMES";
+        private const string BASE_QUERY = "SELECT Id, [Time], [Name] as Church, [Weekday], [ShortWeekDay], [City], [Neighborhood], [Address], [Thumb] FROM VW_MASSTIMES";
         private const string ORDERBY_QUERY = "ORDER BY Name, WeekDay_id, Time";
 
         public MassTimeServices(IConfiguration config, ILogger<MassTimeServices> logger) : base(config, logger)
