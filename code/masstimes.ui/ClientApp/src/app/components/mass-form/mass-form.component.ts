@@ -9,17 +9,6 @@ import { ClrForm } from '@clr/angular';
 })
 
 export class MassFormComponent {
-    @ViewChild(ClrForm, { static: true }) clrForm;
-
-    exampleForm = new FormGroup({
-        sample: new FormControl('', Validators.required),
-    });
-
-    submit() {
-        if (this.exampleForm.invalid) {
-            this.clrForm.markAsTouched();
-        } else {
-            // Do submit logic
-        }
-    }
+    parishName: string;
+    city: string;
 }
