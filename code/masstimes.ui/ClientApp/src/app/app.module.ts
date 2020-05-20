@@ -21,6 +21,7 @@ import { HttpBaseInterceptor } from './inteceptors/http-base.interceptor';
 import { CityService } from './services/city.service';
 import { MassTimeService } from './services/masstime.service';
 import { ChurchService } from './services/church.service';
+import { StorageService } from './services/storage.service';
 
 // Pipes
 import { FilterWeekdayPipe } from './components/pipes/filter.pipe';
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
   providers: [
     CityService,
     MassTimeService,
-    ChurchService
+    ChurchService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

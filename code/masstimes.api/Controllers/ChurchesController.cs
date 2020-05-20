@@ -37,5 +37,10 @@ namespace masstimes.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("{id}/times")]
         public async Task<ActionResult<IEnumerable<DateTime>>> GetTimes(int id) => Ok(await service.GetTimes(id).ConfigureAwait(false));
+
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("{id}/gallery")]
+        public async Task<ActionResult<Gallery>> GetGallery(int id) => Ok(await service.GetGallery(id).ConfigureAwait(false));
     }
 }

@@ -1,0 +1,17 @@
+.card-header {
+  .card-img {
+    display: inline-block;
+
+    img {
+      display: inline-block;
+      max-width: 5em;
+      margin-right: 1em;
+    }
+  }
+
+  p {
+    display: inline-block;
+    width: 50%;
+    max-width: 50%;
+  }
+}

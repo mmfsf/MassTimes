@@ -12,5 +12,6 @@ namespace masstimes.api.Models
         public string City { get; set; }
         public string Neighborhood { get; set; }
         public string Address { get; set; }
+        public string Thumb { get; set; }
     }
 }
