@@ -53,6 +53,7 @@ const appRoutes: Routes = [
     NeighborhoodComponent,
     MassTimeComponent,
     ChurchComponent,
+    MassFormComponent,
     FilterWeekdayPipe
   ],
   imports: [
