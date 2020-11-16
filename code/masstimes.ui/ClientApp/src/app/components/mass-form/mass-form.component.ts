@@ -3,12 +3,18 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ClrForm } from '@clr/angular';
 
 @Component({
-    selector: 'app-mass-form',
-    templateUrl: './mass-form.component.html',
-    styleUrls: ['./mass-form.component.scss'],
+  selector: 'app-mass-form',
+  templateUrl: './mass-form.component.html',
+  styleUrls: ['./mass-form.component.scss'],
 })
-
 export class MassFormComponent {
-    parishName: string;
-    city: string;
+  parishName: string;
+  city: string;
+
+  constructor() { }
+
+  public submit() {
+
+  }
+
 }
