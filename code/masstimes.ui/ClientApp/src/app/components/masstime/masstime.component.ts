@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-masstime',
@@ -9,7 +9,7 @@ export class MassTimeComponent {
 
   public massetimes: Array<any>;
 
-  constructor() {
+  constructor(private el: ElementRef) {
     this.massetimes = new Array<any>();
   }
 
