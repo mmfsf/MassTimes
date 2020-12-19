@@ -12,6 +12,7 @@ import { MassTimeComponent } from './components/masstime/masstime.component';
 import { AppComponent } from './app.component';
 import { ChurchComponent } from './components/church/church.component';
 import { HomeComponent } from './components/home/home.component';
+import { MassFormComponent } from './components/mass-form/mass-form.component';
 
 // Interceptors
 import { HttpBaseInterceptor } from './inteceptors/http-base.interceptor';
@@ -37,7 +38,11 @@ const appRoutes: Routes = [
   {
     path: 'churches',
     component: ChurchComponent
-  }
+   },
+   {
+    path: 'mass-form',
+    component: MassFormComponent
+   }
 ];
 
 @NgModule({
@@ -48,6 +53,7 @@ const appRoutes: Routes = [
     NeighborhoodComponent,
     MassTimeComponent,
     ChurchComponent,
+    MassFormComponent,
     FilterWeekdayPipe
   ],
   imports: [
